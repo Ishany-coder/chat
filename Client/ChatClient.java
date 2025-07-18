@@ -1,3 +1,5 @@
+package Client;
+
 import java.io.*;
 import java.net.*;
 
@@ -34,10 +36,8 @@ public class ChatClient {
                 out.println("exit");
                 break;
             }
-            // Clear the input line visually
             System.out.print("\r");  // Move cursor to start
             System.out.print("\033[2K");  // Clear the line (ANSI escape code)
-            System.out.println("You: " + input);
 
             out.println(input);
         }
