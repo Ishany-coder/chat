@@ -1,5 +1,3 @@
-package Client;
-
 import java.io.*;
 import java.net.*;
 
@@ -10,11 +8,20 @@ public class ChatClient {
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
 
+        String serverMessage = in.readLine();
+        System.out.println(serverMessage);
+        String username = userInput.readLine();
+        out.println(username);
+
+        System.out.println(in.readLine());
+
         new Thread(() -> {
             try {
                 String line;
                 while ((line = in.readLine()) != null) {
-                    System.out.println(line);
+                    if (!line.startsWith(username + ":")) {
+                        System.out.println(line);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -23,9 +30,18 @@ public class ChatClient {
 
         String input;
         while ((input = userInput.readLine()) != null) {
+            if (input.equalsIgnoreCase("exit")) {
+                out.println("exit");
+                break;
+            }
+            // Clear the input line visually
+            System.out.print("\r");  // Move cursor to start
+            System.out.print("\033[2K");  // Clear the line (ANSI escape code)
+            System.out.println("You: " + input);
+
             out.println(input);
-            if (input.equalsIgnoreCase("exit")) break;
         }
+
         socket.close();
         System.exit(0);
     }
