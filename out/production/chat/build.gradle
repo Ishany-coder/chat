@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+    id 'java'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.glassfish.tyrus.bundles:tyrus-standalone-client:2.1.2'
+    implementation 'org.glassfish.tyrus:tyrus-server:2.1.2'
+    implementation 'org.glassfish.tyrus:tyrus-container-grizzly-server:2.1.2'
+    implementation 'org.glassfish.grizzly:grizzly-http-server:2.4.4'
+    implementation 'jakarta.websocket:jakarta.websocket-api:2.1.1'
+}
+
+application {
+    // Replace with your fully-qualified class name if needed
+    mainClass = 'ChatServer'
+}
